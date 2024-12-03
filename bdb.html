@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAMA MO</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #startButton {
+      font-size: 24px;
+      padding: 20px 40px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      position: absolute;
+      z-index: 1;
+    }
+
+    #happyBirthday {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-weight: bold;
+      font-size: 100px;
+      color: #000;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .fallingLetter {
+      position: absolute;
+      opacity: 0;
+      animation: fall 1s forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -100px;
+        opacity: 0;
+      }
+      100% {
+        top: 80vh;
+        opacity: 1;
+      }
+    }
+
+    .fallingImage {
+      position: absolute;
+      opacity: 1;
+      animation-duration: 10s; /* Slower movement */
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: 1;
+      width: 200px; /* Adjust width */
+      height: 200px; /* Adjust height */
+    }
+
+    /* Left to right animation */
+    @keyframes moveLeftToRight {
+      0% {
+        left: -300px;
+        opacity: 1;
+      }
+      100% {
+        left: 100vw;
+        opacity: 1;
+      }
+    }
+
+    /* Right to left animation */
+    @keyframes moveRightToLeft {
+      0% {
+        left: 100vw;
+        opacity: 1;
+      }
+      100% {
+        left: -500px;
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="startButton">Start</button>
+  <div id="happyBirthday"></div>
+
+  <script>
+    document.getElementById("startButton").addEventListener("click", function() {
+      // Hide the start button
+      document.getElementById("startButton").style.display = "none";
+
+      const message = "HAPPY BIRTHDAY";
+      let index = 0;
+      const happyBirthdayDiv = document.getElementById("happyBirthday");
+
+      // Clear any previous animation
+      happyBirthdayDiv.innerHTML = '';
+      happyBirthdayDiv.style.opacity = 1;
+
+      // Animate "HAPPY BIRTHDAY" falling one letter at a time
+      function animateText() {
+        if (index < message.length) {
+          const letter = document.createElement("span");
+          letter.textContent = message[index];
+          letter.classList.add("fallingLetter");
+          letter.style.left = `${(index - message.length / 2) * 50}px`; // Centering the letters
+          happyBirthdayDiv.appendChild(letter);
+          index++;
+          setTimeout(animateText, 500);
+        } else {
+          // After all letters fall, start popping out images
+          setTimeout(popImages, 1000);
+        }
+      }
+
+      // Function to create popping images
+      function popImages() {
+        const images = [
+          'https://via.placeholder.com/200x200?text=Image+1',
+          'https://via.placeholder.com/200x200?text=Image+2'
+        ];
+
+        // Create Image 1 (from left to right)
+        const img1 = document.createElement("img");
+        img1.src = images[0];
+        img1.classList.add("fallingImage");
+        img1.style.top = "0%"; // Positioning it at the top
+        img1.style.left = "-300px"; // Start from the left outside the screen
+        img1.style.animationName = "moveLeftToRight";
+
+        document.body.appendChild(img1);
+
+        // Create Image 2 (from right to left) only after Image 1 reaches halfway
+        const img2 = document.createElement("img");
+        img2.src = images[1];
+        img2.classList.add("fallingImage");
+        img2.style.top = "40%"; // Positioning it just below Image 1
+        img2.style.left = "100vw"; // Start from the right outside the screen
+        img2.style.animationName = "moveRightToLeft";
+        img2.style.animationDelay = "2s"; // Delay the start of Image 2 (when Image 1 is halfway)
+
+        document.body.appendChild(img2);
+      }
+
+      // Start animation
+      animateText();
+    });
+  </script>
+
+</body>
+</html>
