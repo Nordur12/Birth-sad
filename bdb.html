@@ -133,30 +133,63 @@
       // Function to create popping images
       function popImages() {
         const images = [
-          'https://via.placeholder.com/200x200?text=Image+1',
-          'https://via.placeholder.com/200x200?text=Image+2'
-        ];
+              'images/img1.png',
+  'images/img2.png',
+  'images/img3.png',
+  'images/img4.png',
+  'images/img5.png'
+];
 
-        // Create Image 1 (from left to right)
-        const img1 = document.createElement("img");
-        img1.src = images[0];
-        img1.classList.add("fallingImage");
-        img1.style.top = "0%"; // Positioning it at the top
-        img1.style.left = "-300px"; // Start from the left outside the screen
-        img1.style.animationName = "moveLeftToRight";
+// Create Image 1 (from left to right)
+// Create Image 1 (from left to right)
+const img1 = document.createElement("img");
+img1.src = images[0];
+img1.classList.add("fallingImage");
+img1.style.top = "0%"; // Positioning it at the top
+img1.style.left = "-300px"; // Start from the left outside the screen
+img1.style.animationName = "moveLeftToRight";
+document.body.appendChild(img1);
 
-        document.body.appendChild(img1);
+// Create Image 2 (from right to left)
+const img2 = document.createElement("img");
+img2.src = images[1];
+img2.classList.add("fallingImage");
+img2.style.top = "40%"; // Positioning it just below Image 1
+img2.style.left = "100vw"; // Start from the right outside the screen
+img2.style.animationName = "moveRightToLeft";
+img2.style.animationDelay = "2s"; // Delay the start of Image 2 (when Image 1 is halfway)
+document.body.appendChild(img2);
 
-        // Create Image 2 (from right to left) only after Image 1 reaches halfway
-        const img2 = document.createElement("img");
-        img2.src = images[1];
-        img2.classList.add("fallingImage");
-        img2.style.top = "40%"; // Positioning it just below Image 1
-        img2.style.left = "100vw"; // Start from the right outside the screen
-        img2.style.animationName = "moveRightToLeft";
-        img2.style.animationDelay = "2s"; // Delay the start of Image 2 (when Image 1 is halfway)
+// Create Image 3 (from left to right)
+const img3 = document.createElement("img");
+img3.src = images[2];
+img3.classList.add("fallingImage");
+img3.style.top = "0%"; // Positioning it at the top
+img3.style.left = "-300px"; // Start from the left outside the screen
+img3.style.animationName = "moveLeftToRight";
+img3.style.animationDelay = "4s"; // Add a delay for Image 3
+document.body.appendChild(img3);
 
-        document.body.appendChild(img2);
+// Create Image 4 (from right to left)
+const img4 = document.createElement("img");
+img4.src = images[3];
+img4.classList.add("fallingImage");
+img4.style.top = "40%"; // Positioning it just below Image 1
+img4.style.left = "100vw"; // Start from the right outside the screen
+img4.style.animationName = "moveRightToLeft";
+img4.style.animationDelay = "6s"; // Add a delay for Image 4
+document.body.appendChild(img4);
+
+// Create Image 5 (from left to right)
+const img5 = document.createElement("img");
+img5.src = images[4];
+img5.classList.add("fallingImage");
+img5.style.top = "0%"; // Positioning it at the top
+img5.style.left = "-300px"; // Start from the left outside the screen
+img5.style.animationName = "moveLeftToRight";
+img5.style.animationDelay = "8s"; // Add a delay for Image 5
+document.body.appendChild(img5);
+
       }
 
       // Start animation
